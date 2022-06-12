@@ -1,10 +1,13 @@
 @import 'normalize.css';
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600;700&display=swap');
+@import './GridSytem.scss';
 
 :root {
-    --primary: #3898ec;
-    --dark: #000;
-    --light: #fff;
+    --primary: #e50914;
+    --black: #000;
+    --white: #fff;
+    --blue: #3898ec;
+    --text-color: #333;
 }
 
 * {
@@ -22,4 +25,18 @@ body {
     font-size: 1.6rem;
     line-height: 1.5;
     text-rendering: optimizespeed;
+    color: var(--white);
+}
+
+button,
+input,
+[tabindex] {
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
+a[href] {
+    color: var(--white);
+    text-decoration: none;
 }

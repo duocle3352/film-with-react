@@ -1,0 +1,23 @@
+.wrapper {
+    width: 100%;
+    max-height: min((100vh - 96px) - 60px, 734px);
+    padding: 20px;
+    border: 1px solid #666;
+    box-shadow: rgb(0 0 0 / 12%) 0px 2px 12px;
+    background-color: var(--white);
+    overflow-y: scroll;
+    z-index: 99;
+
+    &::-webkit-scrollbar {
+        width: 6px;
+        background-color: rgb(184, 177, 177);
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: #666;
+    }
+
+    // &:hover {
+    //     cursor: pointer;
+    // }
+}
