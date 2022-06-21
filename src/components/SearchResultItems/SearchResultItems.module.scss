@@ -1,11 +1,10 @@
 .wrapper {
     display: flex;
     align-items: center;
-    padding: 10px 0;
-    border-bottom: 1px solid #999;
+    padding: 10px 20px;
 
-    &:last-child {
-        border: none;
+    &:hover {
+        background-color: rgb(238, 232, 232);
     }
 }
 
@@ -13,23 +12,28 @@
     width: 100px;
     margin-right: 16px;
     object-fit: contain;
+    overflow: unset;
 }
 
-.vn-name {
+.name {
     color: var(--text-color);
 }
 
-.eng-name {
+.media-type {
     color: #999;
 }
 
-.rate {
+.info {
     color: #666;
     margin: 10px 0;
+}
 
-    span {
-        margin-right: 8px;
-    }
+.info-wrapper {
+    margin-right: 8px;
+}
+
+.info-item {
+    margin-left: 4px;
 }
 
 .description {

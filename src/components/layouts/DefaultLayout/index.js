@@ -1,15 +1,19 @@
 import Header from '~/components/layouts/components/Header';
-import Sidebar from './Sidebar';
+import Search from '~/components/layouts/components/Search';
 
 function DefaultLayout({ children }) {
     return (
-        <div>
+        <>
             <Header />
-            <div>
-                <Sidebar />
-                <div>{children}</div>
+            <div className="grid wide">
+                <div className="row">
+                    <div className="col l-8 l-o-2 ">
+                        <Search />
+                    </div>
+                    <div>{children}</div>
+                </div>
             </div>
-        </div>
+        </>
     );
 }
 

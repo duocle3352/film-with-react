@@ -1,39 +1,47 @@
 import { faClock, faEarthAsia, faEye } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames/bind';
+
+import { imageService } from '~/apiServices';
+import Image from '~/Image';
 import style from './SearchResultItems.module.scss';
 
 const cx = classNames.bind(style);
 
-function SearchResultItems() {
+function SearchResultItems({ data }) {
     return (
         <div className={cx('wrapper')}>
-            <img
+            <Image
                 className={cx('sticker')}
-                src="https://static.ssphim.net/static/5fe2d564b3fa6403ffa11d1c/5fe2d564b3fa64a035a12448_nguoi-nhen-xa-nha.jpg"
-                alt="ten phim"
+                src={imageService(data.poster_path)}
+                alt={data.original_title}
             />
             <div>
-                <h4 className={cx('vn-name')}>Kỵ sĩ mặt trăng</h4>
-                <h5 className={cx('eng-name')}>Moon Knight</h5>
-                <div className={cx('rate')}>
-                    <span>
+                <h4 className={cx('name')}>
+                    {data.original_title || data.name}
+                </h4>
+                <h5 className={cx('media-type')}>Media: {data.media_type}</h5>
+                <div className={cx('info')}>
+                    <span className={cx('info-wrapper')}>
                         <FontAwesomeIcon icon={faEarthAsia} />
-                        UA
+                        <span className={cx('info-item')}>
+                            {data.original_language}
+                        </span>
                     </span>
-                    <span>
+                    <span className={cx('info-wrapper')}>
                         <FontAwesomeIcon icon={faClock} />
-                        2009
+                        <span className={cx('info-item')}>
+                            {data.release_date || data.first_air_date}
+                        </span>
                     </span>
-                    <span>
+                    <span className={cx('info-wrapper')}>
                         <FontAwesomeIcon icon={faEye} />
-                        122.334
+                        <span className={cx('info-item')}>
+                            {data.vote_count}
+                        </span>
                     </span>
                 </div>
-                <p className={cx('description')}>
-                    Chiến thắng 1 giải BAFTA cùng rất nhiều giải thưởng lớn khác, ít ai có thể ngờ rằng Mặt Trăng lại
-                    làm được điều đó khi bộ phim sản xuất bởi điện ảnh Anh này
-                </p>
+                <p className={cx('description')}>{data.overview}</p>
             </div>
         </div>
     );
