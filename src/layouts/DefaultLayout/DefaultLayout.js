@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
-import Header from '~/components/layouts/components/Header';
-import Search from '~/components/layouts/components/Search';
+import Header from '~/layouts/components/Header';
+import Search from '~/layouts/components/Search';
 
 function DefaultLayout({ children }) {
     return (

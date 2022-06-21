@@ -2,6 +2,7 @@ import { Link, NavLink } from 'react-router-dom';
 import classNames from 'classnames/bind';
 
 import Button from '~/components/Button';
+import config from '~/configs';
 import style from './Header.module.scss';
 import images from '~/access/image';
 
@@ -12,17 +13,21 @@ function Header() {
         <div className={cx('wrapper')}>
             <div className="grid wide">
                 <div className={cx('content', 'row')}>
-                    <Link to="/">
+                    <Link to={config.routes.home}>
                         <img src={images.logo} alt="Netflix" />
                     </Link>
                     <div>
-                        <NavLink className={cx('nav')} to="/" exact="true">
+                        <NavLink
+                            className={cx('nav')}
+                            to={config.routes.home}
+                            exact="true"
+                        >
                             Home
                         </NavLink>
-                        <NavLink className={cx('nav')} to="/movies">
+                        <NavLink className={cx('nav')} to={config.routes.movie}>
                             Movies
                         </NavLink>
-                        <NavLink className={cx('nav')} to="/tv">
+                        <NavLink className={cx('nav')} to={config.routes.tv}>
                             TV Series
                         </NavLink>
                     </div>
