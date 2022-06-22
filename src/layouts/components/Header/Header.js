@@ -1,7 +1,8 @@
-import { Link, NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import classNames from 'classnames/bind';
 
 import Button from '~/components/Button';
+import { Navbar, NavbarItem } from '../Navbar';
 import config from '~/configs';
 import style from './Header.module.scss';
 import images from '~/access/image';
@@ -16,21 +17,11 @@ function Header() {
                     <Link to={config.routes.home}>
                         <img src={images.logo} alt="Netflix" />
                     </Link>
-                    <div>
-                        <NavLink
-                            className={cx('nav')}
-                            to={config.routes.home}
-                            exact="true"
-                        >
-                            Home
-                        </NavLink>
-                        <NavLink className={cx('nav')} to={config.routes.movie}>
-                            Movies
-                        </NavLink>
-                        <NavLink className={cx('nav')} to={config.routes.tv}>
-                            TV Series
-                        </NavLink>
-                    </div>
+                    <Navbar>
+                        <NavbarItem title="Home" to={config.routes.home} />
+                        <NavbarItem title="Movies" to={config.routes.movie} />
+                        <NavbarItem title=" TV Series" to={config.routes.tv} />
+                    </Navbar>
                     <div>
                         <Button gold>Đăng nhập</Button>
                     </div>

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
     faCircleXmark,
@@ -8,72 +8,65 @@ import Tippy from '@tippyjs/react/headless';
 import classNames from 'classnames/bind';
 
 import { useDebounce } from '~/hook';
+import RenderResult from './RenderResult';
 import searchService from '~/apiServices/searchService';
 import { Wrapper as PopperWrapper } from '~/components/Popper';
-import SearchResultItems from '~/components/SearchResultItems';
 import style from './Search.module.scss';
 import Button from '~/components/Button';
+import configs from '~/configs';
 
 const cx = classNames.bind(style);
 
 function Search() {
     const [searchValue, setSearchValue] = useState('');
-    const [searchMovieResult, setSearchMovieResult] = useState([]);
-    const [searchTVResult, setSearchTVResult] = useState([]);
-    const [showResult, setShowResult] = useState(true);
-
-    const inputRef = useRef();
+    const [searchResult, setSearchResult] = useState([]);
+    const [showResult, setShowResult] = useState(false);
 
     const debounce = useDebounce(searchValue, 800);
 
-    // fetch movie api
+    const inputRef = useRef();
+
     useEffect(() => {
         if (!debounce.trim()) {
-            setSearchMovieResult([]);
-            setSearchTVResult([]);
+            setSearchResult([]);
             return;
         }
 
-        const fetchMovieAPI = async () => {
+        const fetchAPI = async () => {
             const movieResults = await searchService(debounce);
             const newMovieResults = movieResults.slice(0, 9);
 
-            setSearchMovieResult(newMovieResults);
+            setSearchResult(newMovieResults);
         };
 
-        // const fetchTvAPI = async () => {
-        //     const TvResults = await searchService('tv', debounce);
-        //     const newTvResult = TvResults.slice(0, 3);
-
-        //     setSearchTVResult(newTvResult);
-        // };
-
-        fetchMovieAPI();
-        // fetchTvAPI();
+        fetchAPI();
     }, [debounce]);
+
+    const NewResult = useCallback(() => {
+        return <RenderResult data={searchResult} />;
+    }, [searchResult]);
 
     const handleClear = () => {
         inputRef.current.focus();
         setSearchValue('');
-        setSearchMovieResult([]);
+        setSearchResult([]);
+    };
+
+    const handleChangeValue = (e) => {
+        setSearchValue(e.target.value);
     };
 
     return (
         <Tippy
             interactive
-            visible={
-                (showResult && searchMovieResult.length > 0) ||
-                (showResult && searchTVResult.length > 0)
-            }
+            visible={showResult && searchResult.length > 0}
             render={(attrs) => (
                 <div className={cx('search-result')} tabIndex="-1" {...attrs}>
                     <PopperWrapper>
                         <h3 className={cx('label')}>Result</h3>
-                        {searchMovieResult.map((result) => (
-                            <SearchResultItems key={result.id} data={result} />
-                        ))}
+                        <NewResult />
                         <div className={cx('show')}>
-                            <Button to="/search" blue>
+                            <Button to={configs.routes.search} blue>
                                 Show more
                             </Button>
                         </div>
@@ -89,9 +82,7 @@ function Search() {
                         value={searchValue}
                         className={cx('search-input')}
                         placeholder="Bạn muốn tìm gì?"
-                        onChange={(e) => {
-                            setSearchValue(e.target.value);
-                        }}
+                        onChange={handleChangeValue}
                         onFocus={() => setShowResult(true)}
                     />
                     <FontAwesomeIcon
