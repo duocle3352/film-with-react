@@ -40,3 +40,14 @@ a {
     color: var(--white);
     text-decoration: none;
 }
+
+// coustom swiper
+.swiper-pagination-bullet {
+    background-color: var(--white);
+    opacity: 0.5;
+}
+
+.swiper-pagination-bullet-active {
+    background-color: var(--primary);
+    opacity: 1;
+}

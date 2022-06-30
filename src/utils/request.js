@@ -14,3 +14,4 @@ const get = async (path, options = {}) => {
 export { get };
 
 // https://api.themoviedb.org/3/search/multi?api_key=422c277f59a1913e0290741efbfa04e8&language=en-US&query=home&page=1&include_adult=false
+// https://api.themoviedb.org/3/trending/all/day?api_key=422c277f59a1913e0290741efbfa04e8

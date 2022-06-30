@@ -1,0 +1,32 @@
+.wrapper {
+    position: relative;
+    background-color: #2d424e;
+    width: 100%;
+    overflow: hidden;
+}
+
+.slider-item {
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.image {
+    margin: 10px;
+    height: 336px;
+    object-fit: cover;
+}
+
+.name {
+    position: absolute;
+    bottom: 30px;
+    left: 10px;
+    width: calc(100% - 20px);
+    padding: 0 14px;
+    font-size: 1.8rem;
+    font-weight: 600;
+    line-height: 2.2rem;
+    text-align: center;
+    color: var(--white);
+    background-color: rgba(102, 102, 102, 0.8);
+}

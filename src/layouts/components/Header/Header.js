@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import classNames from 'classnames/bind';
 
-import Button from '~/components/Button';
+import Search from '../Search';
 import { Navbar, NavbarItem } from '../Navbar';
 import config from '~/configs';
 import style from './Header.module.scss';
@@ -13,7 +13,7 @@ function Header() {
     return (
         <div className={cx('wrapper')}>
             <div className="grid wide">
-                <div className={cx('content', 'row')}>
+                <div className={cx('content', 'row', 'col-12')}>
                     <Link to={config.routes.home}>
                         <img src={images.logo} alt="Netflix" />
                     </Link>
@@ -22,9 +22,7 @@ function Header() {
                         <NavbarItem title="Movies" to={config.routes.movie} />
                         <NavbarItem title=" TV Series" to={config.routes.tv} />
                     </Navbar>
-                    <div>
-                        <Button gold>Đăng nhập</Button>
-                    </div>
+                    <Search />
                 </div>
             </div>
         </div>
