@@ -32,9 +32,10 @@ function Slider() {
         <div className={cx('wrapper')}>
             <Swiper
                 modules={[Pagination, Autoplay]}
-                spaceBetween={0}
+                spaceBetween={20}
                 slidesPerView={5}
                 pagination={{ clickable: true }}
+                loop={true}
                 autoplay={{
                     delay: 2500,
                     disableOnInteraction: false,
@@ -44,7 +45,7 @@ function Slider() {
                     const sliderImg = imageService(data.poster_path, '300');
                     return (
                         <SwiperSlide
-                            className={cx('slider-item')}
+                            className={cx('slider-item', 'l-2-4')}
                             key={data.id}
                         >
                             <Image

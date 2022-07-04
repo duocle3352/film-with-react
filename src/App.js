@@ -6,7 +6,7 @@ import DefaultLayout from './layouts/DefaultLayout';
 function App() {
     return (
         <Router>
-            <div className="App">
+            <div className="App grid wide">
                 <Routes>
                     {publicRoutes.map((route, index) => {
                         const Pages = route.element;

@@ -7,19 +7,11 @@ function DefaultLayout({ children }) {
     return (
         <>
             <Header />
-            <div className="grid wide">
-                <div className="row">
-                    <Slider />
-                </div>
+            <div className="row">
+                <Slider />
             </div>
-            <div className="grid wide">
-                <div className="row">
-                    <div>{children}</div>
-                    <div className="col l-8 l-o-2 ">
-                        <Footer />
-                    </div>
-                </div>
-            </div>
+            {children}
+            <Footer />
         </>
     );
 }

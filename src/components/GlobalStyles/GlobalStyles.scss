@@ -3,11 +3,13 @@
 @import './GridSytem.scss';
 
 :root {
-    --primary: #e50914;
+    --primary: #f1b722;
     --black: #000;
     --white: #fff;
     --blue: #3898ec;
     --text-color: #333;
+
+    --header-slider-background: #0c2738;
 }
 
 * {
@@ -26,6 +28,7 @@ body {
     line-height: 1.5;
     text-rendering: optimizespeed;
     color: var(--text-color);
+    background-color: #2d424e;
 }
 
 button,

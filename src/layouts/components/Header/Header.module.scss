@@ -1,12 +1,9 @@
 .wrapper {
-    border-bottom: 1px solid var(--primary);
-    background-color: #0c2738;
-}
-
-.content {
     height: 80px;
     align-items: center;
     justify-content: space-between;
+    border-bottom: 1px solid var(--primary);
+    background-color: var(--header-slider-background);
 }
 
 .nav {
