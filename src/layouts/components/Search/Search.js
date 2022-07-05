@@ -81,7 +81,7 @@ function Search() {
                         ref={inputRef}
                         value={searchValue}
                         className={cx('search-input')}
-                        placeholder="Bạn muốn tìm gì?"
+                        placeholder="Search your film..."
                         onChange={handleChangeValue}
                         onFocus={() => setShowResult(true)}
                     />

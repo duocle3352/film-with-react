@@ -1,0 +1,36 @@
+.wrapper {
+    background-color: #0000001f;
+    padding: 30px 0;
+}
+
+.footer-logo {
+    text-align: center;
+    margin: auto;
+}
+
+.list-item {
+    display: flex !important;
+    flex-direction: column;
+    font-size: 1.6rem;
+    font-weight: 600;
+    line-height: 3rem;
+
+    a {
+        &:hover {
+            color: var(--primary);
+        }
+    }
+}
+
+.social-icon {
+    font-size: 2rem;
+    width: 30px;
+}
+
+.end {
+    color: var(--primary);
+    font-size: 1.3rem;
+    text-align: center;
+    background-color: #9999;
+    margin-top: 10px;
+}
