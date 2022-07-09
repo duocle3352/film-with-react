@@ -24,6 +24,7 @@
 
 .item-img {
     width: 100%;
+    height: 100%;
 }
 
 .play-btn {
@@ -47,4 +48,10 @@
     color: var(--white);
     text-align: center;
     padding-top: 4px;
+}
+
+// image type
+
+.large {
+    height: 338px;
 }
