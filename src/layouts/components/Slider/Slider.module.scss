@@ -4,6 +4,7 @@
     padding: 12px;
     background-color: var(--header-slider-background);
     overflow: hidden;
+    user-select: none;
 }
 
 .slider-item {
