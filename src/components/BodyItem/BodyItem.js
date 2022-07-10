@@ -26,7 +26,7 @@ function BodyItem({ data, large }) {
                 </button>
             </div>
             <h4 className={cx('item-name')}>
-                {data.original_title || data.original_name}
+                {data.original_title || data.original_name || data.name}
             </h4>
         </li>
     );

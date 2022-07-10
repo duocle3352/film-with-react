@@ -34,7 +34,7 @@ function Search() {
 
         const fetchAPI = async () => {
             const movieResults = await searchService(debounce);
-            const newMovieResults = movieResults.slice(0, 9);
+            const newMovieResults = movieResults.slice(0, 5);
 
             setSearchResult(newMovieResults);
         };
@@ -56,6 +56,11 @@ function Search() {
         setSearchValue(e.target.value);
     };
 
+    // let history = useHistory();
+    // const handleShowMore = () => {
+    //     history.push(configs.routes.search);
+    // };
+
     return (
         <Tippy
             interactive
@@ -66,6 +71,7 @@ function Search() {
                         <h3 className={cx('label')}>Result</h3>
                         <NewResult />
                         <div className={cx('show')}>
+                            {/* to={configs.routes.search} */}
                             <Button to={configs.routes.search} blue>
                                 Show more
                             </Button>

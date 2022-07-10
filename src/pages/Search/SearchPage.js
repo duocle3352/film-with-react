@@ -1,12 +1,22 @@
-import { useState } from 'react';
-import { useFetchPopularAPI } from '~/hook';
+import { useEffect, useState } from 'react';
+import { searchService } from '~/apiServices';
 import Pagination from '~/components/Pagination';
 import MovieAndTvBodyRender from '~/components/BodyRender';
 
-function TvSeries() {
+function SearchPage() {
     const [currentPage, setCurrentPage] = useState(1);
+    const [listItem, setListItem] = useState([]);
 
-    const listTvSeries = useFetchPopularAPI('tv', currentPage);
+    useEffect(() => {
+        const fetchAPI = async () => {
+            const results = await searchService('home', currentPage);
+
+            setListItem(results);
+        };
+
+        fetchAPI();
+    }, [currentPage]);
+
     const handlePageChange = (pageNumber) => {
         setCurrentPage(pageNumber);
         window.scrollTo(0, 0);
@@ -14,7 +24,7 @@ function TvSeries() {
 
     return (
         <div className="row">
-            <MovieAndTvBodyRender listItem={listTvSeries} title="TV Series" />
+            <MovieAndTvBodyRender listItem={listItem} title="Search result:" />
             <Pagination
                 totalCount={100}
                 currentPage={currentPage}
@@ -26,4 +36,4 @@ function TvSeries() {
     );
 }
 
-export default TvSeries;
+export default SearchPage;

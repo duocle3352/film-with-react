@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useFetchPopularAPI } from '~/hook';
 import Pagination from '~/components/Pagination';
-import MovieAndTvBodyRender from '~/components/MovieAndTvBodyRender';
+import MovieAndTvBodyRender from '~/components/BodyRender';
 
 function Movies() {
     const [currentPage, setCurrentPage] = useState(1);
