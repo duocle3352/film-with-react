@@ -9,14 +9,17 @@ import style from './Home.module.scss';
 const cx = classNames.bind(style);
 
 function Home() {
-    const listMoviesItem = useFetchPopularAPI('movie').slice(0, 10);
-    const listTvItem = useFetchPopularAPI('tv').slice(0, 10);
+    const listMoviesItem = useFetchPopularAPI(configs.filmType.movie).slice(
+        0,
+        10,
+    );
+    const listTvItem = useFetchPopularAPI(configs.filmType.tv).slice(0, 10);
 
     const scrollToTop = () => {
         window.scrollTo(0, 0);
     };
 
-    const RenderListItem = ({ title, link, data }) => {
+    const RenderListItem = ({ title, link, data, type }) => {
         return (
             <div className={cx('col', 'l-10')}>
                 <div className={cx('header')}>
@@ -29,11 +32,13 @@ function Home() {
                         See more
                     </Link>
                 </div>
-                <ul className={cx('list-item', 'row', 'sm-gutter')}>
+                <div className={cx('row', 'sm-gutter')}>
                     {data.map((item) => {
-                        return <BodyItem data={item} key={item.id} />;
+                        return (
+                            <BodyItem data={item} key={item.id} type={type} />
+                        );
                     })}
-                </ul>
+                </div>
             </div>
         );
     };
@@ -44,17 +49,19 @@ function Home() {
                 title="Popular movies"
                 link={configs.routes.movie}
                 data={listMoviesItem}
+                type={configs.filmType.movie}
             />
 
-            <RightSidebar type="movie" />
+            <RightSidebar type={configs.filmType.movie} />
 
             <RenderListItem
                 title="Popular TV"
                 link={configs.routes.tv}
                 data={listTvItem}
+                type={configs.filmType.tv}
             />
 
-            <RightSidebar type="tv" />
+            <RightSidebar type={configs.filmType.tv} />
         </div>
     );
 }

@@ -8,11 +8,11 @@ function MovieAndTvBodyRender({ listItem, title }) {
     return (
         <>
             <h1 className={cx('title', 'l-12')}>{title}</h1>
-            <ul className={'row'}>
+            <div className={'row'}>
                 {listItem.map((item) => {
                     return <BodyItem key={item.id} data={item} large />;
                 })}
-            </ul>
+            </div>
         </>
     );
 }

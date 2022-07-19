@@ -2,19 +2,35 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames/bind';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlay } from '@fortawesome/free-solid-svg-icons';
+import { Link } from 'react-router-dom';
 
 import Image from '~/Image';
+import { useStoreContext } from '~/hook';
 import { imageService } from '~/apiServices';
 import style from './BodyItem.module.scss';
+import { setCurrentFilmId, setCurrentFilmType } from '~/stores/actions';
 
 const cx = classNames.bind(style);
 
-function BodyItem({ data, large }) {
+function BodyItem({ data, large, type }) {
+    const [state, dispatch] = useStoreContext();
+
     const imgLink = imageService(data.poster_path, '300');
     const classes = cx('item-control', { large });
 
+    const handleClick = () => {
+        window.scrollTo(0, 0);
+        dispatch(setCurrentFilmId(data.id));
+        dispatch(setCurrentFilmType(type));
+    };
+
     return (
-        <li key={data.id} className={cx('item', 'col', 'l-2-4')}>
+        <Link
+            className={cx('item', 'col', 'l-2-4')}
+            key={data.id}
+            onClick={handleClick}
+            to={`@${data.id}`}
+        >
             <div className={classes}>
                 <Image
                     className={cx('item-img')}
@@ -28,7 +44,7 @@ function BodyItem({ data, large }) {
             <h4 className={cx('item-name')}>
                 {data.original_title || data.original_name || data.name}
             </h4>
-        </li>
+        </Link>
     );
 }
 

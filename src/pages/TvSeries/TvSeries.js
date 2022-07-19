@@ -1,12 +1,13 @@
 import { useState } from 'react';
 import { useFetchPopularAPI } from '~/hook';
 import Pagination from '~/components/Pagination';
+import configs from '~/configs';
 import MovieAndTvBodyRender from '~/components/BodyRender';
 
 function TvSeries() {
     const [currentPage, setCurrentPage] = useState(1);
 
-    const listTvSeries = useFetchPopularAPI('tv', currentPage);
+    const listTvSeries = useFetchPopularAPI(configs.filmType.tv, currentPage);
     const handlePageChange = (pageNumber) => {
         setCurrentPage(pageNumber);
         window.scrollTo(0, 0);

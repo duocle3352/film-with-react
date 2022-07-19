@@ -15,6 +15,10 @@ import style from './Footer.module.scss';
 const cx = classNames.bind(style);
 
 function Footer() {
+    const scrollToTop = () => {
+        window.scrollTo(0, 0);
+    };
+
     return (
         <div className={cx('wrapper', 'row')}>
             <Link
@@ -29,8 +33,12 @@ function Footer() {
                 <Link to={configs.routes.home}>Privacy policy</Link>
             </div>
             <div className={cx('list-item', 'col', 'l-3')}>
-                <Link to={configs.routes.movie}>Movies</Link>
-                <Link to={configs.routes.tv}>TV Series</Link>
+                <Link to={configs.routes.movie} onClick={scrollToTop}>
+                    Movies
+                </Link>
+                <Link onClick={scrollToTop} to={configs.routes.tv}>
+                    TV Series
+                </Link>
             </div>
             <div className={cx('list-item', 'col', 'l-3')}>
                 <Link to={configs.routes.home}>

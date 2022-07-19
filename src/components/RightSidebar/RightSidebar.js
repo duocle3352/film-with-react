@@ -23,7 +23,7 @@ function RightSidebar({ type }) {
         };
 
         fetchAPI();
-    });
+    }, []);
 
     return (
         <div className={cx('wrapper', 'col', 'l-2')}>
