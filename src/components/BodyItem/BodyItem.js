@@ -6,9 +6,9 @@ import { Link } from 'react-router-dom';
 
 import Image from '~/Image';
 import { useStoreContext } from '~/hook';
+import { setCurrentFilmId, setCurrentFilmType } from '~/stores/actions';
 import { imageService } from '~/apiServices';
 import style from './BodyItem.module.scss';
-import { setCurrentFilmId, setCurrentFilmType } from '~/stores/actions';
 
 const cx = classNames.bind(style);
 
@@ -29,7 +29,7 @@ function BodyItem({ data, large, type }) {
             className={cx('item', 'col', 'l-2-4')}
             key={data.id}
             onClick={handleClick}
-            to={`@${data.id}`}
+            to={`/@${data.id}`}
         >
             <div className={classes}>
                 <Image

@@ -1,33 +1,13 @@
-import { useEffect, useState } from 'react';
-import { searchService } from '~/apiServices';
-import { useStoreContext, useDebounce } from '~/hook';
+import { useStoreContext, useDebounce, useSearchService } from '~/hook';
 import { actions } from '~/stores';
 import Pagination from '~/components/Pagination';
-import MovieAndTvBodyRender from '~/components/BodyRender';
+import { BodyRender } from '~/components/BodyRender';
 
 function SearchPage() {
-    const [listItem, setListItem] = useState([]);
     const [state, dispatch] = useStoreContext();
     const { searchValue, currentPage } = state;
     const debounce = useDebounce(searchValue, 800);
-
-    useEffect(() => {
-        if (!debounce.trim()) {
-            setListItem([]);
-            return;
-        }
-        const fetchAPI = async () => {
-            const results = await searchService(debounce, currentPage);
-
-            setListItem(results);
-        };
-
-        fetchAPI();
-
-        // hide search result
-        dispatch(actions.setShowSearchResult(false));
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [debounce, currentPage]);
+    const listItem = useSearchService(debounce, currentPage);
 
     const handlePageChange = (pageNumber) => {
         dispatch(actions.setCurrentPage(pageNumber));
@@ -36,7 +16,7 @@ function SearchPage() {
 
     return (
         <div className="row">
-            <MovieAndTvBodyRender
+            <BodyRender
                 listItem={listItem}
                 title={`Search result: ${searchValue}`}
             />

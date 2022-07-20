@@ -1,20 +1,23 @@
 import { useState } from 'react';
-import { useFetchPopularAPI } from '~/hook';
+import { useFetchPopularService } from '~/hook';
 import Pagination from '~/components/Pagination';
 import configs from '~/configs';
-import MovieAndTvBodyRender from '~/components/BodyRender';
+import { BodyRender } from '~/components/BodyRender';
 
 function Movies() {
     const [currentPage, setCurrentPage] = useState(1);
 
-    const listMovies = useFetchPopularAPI(configs.filmType.movie, currentPage);
+    const listMovies = useFetchPopularService(
+        configs.filmType.movie,
+        currentPage,
+    );
     const handlePageChange = (pageNumber) => {
         setCurrentPage(pageNumber);
         window.scrollTo(0, 0);
     };
     return (
         <div className="row">
-            <MovieAndTvBodyRender listItem={listMovies} title="Movies" />
+            <BodyRender listItem={listMovies} title="Movies" />
             <Pagination
                 totalCount={100}
                 currentPage={currentPage}

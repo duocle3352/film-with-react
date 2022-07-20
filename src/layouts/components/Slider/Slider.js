@@ -1,12 +1,12 @@
-import { useEffect, useState } from 'react';
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Pagination, Autoplay } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import classNames from 'classnames/bind';
 
-// import configs from '~/configs';
 import Image from '~/Image';
-import { trendingService, imageService } from '~/apiServices';
+import { useStoreContext, useTrendingService } from '~/hook';
+import { setCurrentFilmId, setCurrentFilmType } from '~/stores/actions';
+import { imageService } from '~/apiServices';
 import style from './Slider.module.scss';
 
 import 'swiper/css';
@@ -16,17 +16,8 @@ import 'swiper/css/pagination';
 const cx = classNames.bind(style);
 
 function Slider() {
-    const [sliderData, setSliderData] = useState([]);
-    useEffect(() => {
-        const fetchAPI = async () => {
-            const res = await trendingService();
-            const result = res.slice(0, 10);
-
-            setSliderData(result);
-        };
-
-        fetchAPI();
-    }, []);
+    const [state, dispatch] = useStoreContext();
+    const sliderData = useTrendingService();
 
     return (
         <div className={cx('wrapper')}>
@@ -48,15 +39,26 @@ function Slider() {
                             className={cx('slider-item', 'l-2-4')}
                             key={data.id}
                         >
-                            <Image
-                                onClick={() => alert(data.title || data.name)}
-                                className={cx('image')}
-                                src={sliderImg}
-                                alt={data.title || data.name}
-                            />
-                            <div className={cx('name')}>
-                                {data.title || data.name}
-                            </div>
+                            <Link
+                                to={`/@${data.id}`}
+                                className={cx('slider-link')}
+                                onClick={() => {
+                                    window.scrollTo(0, 0);
+                                    dispatch(setCurrentFilmId(data.id));
+                                    dispatch(
+                                        setCurrentFilmType(data.media_type),
+                                    );
+                                }}
+                            >
+                                <Image
+                                    className={cx('image')}
+                                    src={sliderImg}
+                                    alt={data.title || data.name}
+                                />
+                                <div className={cx('name')}>
+                                    {data.title || data.name}
+                                </div>
+                            </Link>
                         </SwiperSlide>
                     );
                 })}

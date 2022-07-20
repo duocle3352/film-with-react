@@ -13,6 +13,15 @@
     cursor: pointer;
 }
 
+.slider-link {
+    &:hover {
+        opacity: 0.8;
+        .name {
+            color: var(--primary);
+        }
+    }
+}
+
 .image {
     width: 100%;
     height: 336px;

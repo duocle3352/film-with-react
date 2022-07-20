@@ -1,30 +1,20 @@
 import PropTypes from 'prop-types';
-import { useEffect, useState } from 'react';
 import classNames from 'classnames/bind';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 
 import Image from '~/Image';
-import { topRateService, imageService } from '~/apiServices';
-import configs from '~/configs';
+import { imageService } from '~/apiServices';
+import { useStoreContext, useTopRateService } from '~/hook';
+import { setCurrentFilmId, setCurrentFilmType } from '~/stores/actions';
 import style from './RightSidebar.module.scss';
 
 const cx = classNames.bind(style);
 
 function RightSidebar({ type }) {
-    const [listItem, setListItem] = useState([]);
-
-    useEffect(() => {
-        const fetchAPI = async () => {
-            const resultTv = await topRateService(type);
-            const newResultTv = resultTv.slice(0, 10);
-            setListItem(newResultTv);
-        };
-
-        fetchAPI();
-    }, []);
-
+    const [state, dispatch] = useStoreContext();
+    const listItem = useTopRateService(type);
     return (
         <div className={cx('wrapper', 'col', 'l-2')}>
             <h3 className={cx('header')}>Top movie rate</h3>
@@ -34,9 +24,14 @@ function RightSidebar({ type }) {
 
                     return (
                         <Link
-                            to={configs.routes.movie}
+                            to={`/@${item.id}`}
                             key={item.id}
                             className={cx('item')}
+                            onClick={() => {
+                                window.scrollTo(0, 0);
+                                dispatch(setCurrentFilmId(item.id));
+                                dispatch(setCurrentFilmType(type));
+                            }}
                         >
                             <Image
                                 className={cx('item-img')}

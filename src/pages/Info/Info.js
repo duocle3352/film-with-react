@@ -1,33 +1,25 @@
 import classNames from 'classnames/bind';
-import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 
-import {
-    filmDetailService,
-    imageService,
-    getCastService,
-    getFinalTrailer,
-    getSimilarFilm,
-} from '~/apiServices';
+import { imageService } from '~/apiServices';
 import Image from '~/Image';
-import { useStoreContext } from '~/hook';
+import {
+    useStoreContext,
+    useFilmDetailService,
+    useCastService,
+    useFinalTrailerService,
+    useSimilarFilmService,
+} from '~/hook';
+import { setCurrentFilmId, setCurrentFilmType } from '~/stores/actions';
 import style from './Info.module.scss';
 
 const cx = classNames.bind(style);
 
 function Info() {
-    const [state] = useStoreContext();
+    const [state, dispatch] = useStoreContext();
     const { currentFilmId, currentFilmType } = state;
-
-    const [currentFilm, setCurrentFilm] = useState({});
-    const [casts, setCast] = useState([]);
-    const [trailerKey, setTrailerKey] = useState('');
-    const [similarFilms, setSimilarFilms] = useState([]);
-
-    const bannerImgLink = `https://image.tmdb.org/t/p/original${currentFilm.backdrop_path}`;
-    const posterLink = `https://image.tmdb.org/t/p/original${currentFilm.poster_path}`;
-    const trailerLink = `https://www.youtube.com/embed/${trailerKey}`;
 
     // Save film id in local storage
     const FILM_ID = 'film-id';
@@ -36,58 +28,24 @@ function Info() {
         localStorage.setItem(FILM_ID, JSON.stringify(currentFilmId));
         localStorage.setItem(FILM_TYPE, JSON.stringify(currentFilmType));
     }
-    const storageFilmId = JSON.parse(localStorage.getItem(FILM_ID));
     const storageFilmType = JSON.parse(localStorage.getItem(FILM_TYPE));
+    const storageFilmId = JSON.parse(localStorage.getItem(FILM_ID));
 
     // Get current film
-    useEffect(() => {
-        const fetchAPI = async () => {
-            const result = await filmDetailService(
-                storageFilmType,
-                storageFilmId,
-            );
-            setCurrentFilm(result);
-        };
-
-        fetchAPI();
-    }, [storageFilmType, storageFilmId]);
+    const currentFilm = useFilmDetailService(storageFilmType, storageFilmId);
 
     // Get cast of current film
-    useEffect(() => {
-        const fetchAPI = async () => {
-            const result = await getCastService(storageFilmType, storageFilmId);
-            const newResult = result.slice(0, 6);
-
-            setCast(newResult);
-        };
-
-        fetchAPI();
-    }, [storageFilmType, storageFilmId]);
+    const casts = useCastService(storageFilmType, storageFilmId);
 
     // Get final trailer of film
-    useEffect(() => {
-        const fetchAPI = async () => {
-            const result = await getFinalTrailer(
-                storageFilmType,
-                storageFilmId,
-            );
-
-            setTrailerKey(result.key);
-        };
-
-        fetchAPI();
-    }, [storageFilmType, storageFilmId]);
+    const trailerKey = useFinalTrailerService(storageFilmType, storageFilmId);
 
     // Get similar of current film
-    useEffect(() => {
-        const fetchAPI = async () => {
-            const result = await getSimilarFilm(storageFilmType, storageFilmId);
+    const similarFilms = useSimilarFilmService(storageFilmType, storageFilmId);
 
-            setSimilarFilms(result);
-        };
-
-        fetchAPI();
-    }, [storageFilmType, storageFilmId]);
+    const bannerImgLink = `https://image.tmdb.org/t/p/original${currentFilm.backdrop_path}`;
+    const posterLink = `https://image.tmdb.org/t/p/original${currentFilm.poster_path}`;
+    const trailerLink = `https://www.youtube.com/embed/${trailerKey}`;
 
     if (storageFilmId) {
         return (
@@ -109,7 +67,8 @@ function Info() {
                     </div>
                     <div className={cx('info', 'col', 'l-8')}>
                         <h1 className={cx('name')}>
-                            {currentFilm.original_title}
+                            {currentFilm.original_title ||
+                                currentFilm.original_name}
                         </h1>
                         <div className={cx('genres')}>
                             {currentFilm.genres &&
@@ -175,17 +134,35 @@ function Info() {
                                     className={cx('similar-item', 'l-2')}
                                     key={similarFilm.id}
                                 >
-                                    <Image
-                                        className={cx('similar-image')}
-                                        src={similarFilmPoster}
-                                        alt={
-                                            similarFilm.title ||
-                                            similarFilm.name
-                                        }
-                                    />
-                                    <h4 className={cx('similar-name')}>
-                                        {similarFilm.title || similarFilm.name}
-                                    </h4>
+                                    <Link
+                                        to={`/@${similarFilm.id}`}
+                                        onClick={() => {
+                                            window.scrollTo(0, 0);
+                                            dispatch(
+                                                setCurrentFilmId(
+                                                    similarFilm.id,
+                                                ),
+                                            );
+                                            dispatch(
+                                                setCurrentFilmType(
+                                                    storageFilmType,
+                                                ),
+                                            );
+                                        }}
+                                    >
+                                        <Image
+                                            className={cx('similar-image')}
+                                            src={similarFilmPoster}
+                                            alt={
+                                                similarFilm.title ||
+                                                similarFilm.name
+                                            }
+                                        />
+                                        <h4 className={cx('similar-name')}>
+                                            {similarFilm.title ||
+                                                similarFilm.name}
+                                        </h4>
+                                    </Link>
                                 </SwiperSlide>
                             );
                         })}

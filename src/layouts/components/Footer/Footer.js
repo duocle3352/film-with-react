@@ -22,15 +22,22 @@ function Footer() {
     return (
         <div className={cx('wrapper', 'row')}>
             <Link
+                onClick={scrollToTop}
                 className={cx('footer-logo', 'col', 'l-3')}
                 to={configs.routes.home}
             >
                 <img src={images.logo} alt="logo" />
             </Link>
             <div className={cx('list-item', 'col', 'l-3')}>
-                <Link to={configs.routes.home}>Contact us</Link>
-                <Link to={configs.routes.home}>About us</Link>
-                <Link to={configs.routes.home}>Privacy policy</Link>
+                <Link onClick={scrollToTop} to={configs.routes.home}>
+                    About us
+                </Link>
+                <Link onClick={scrollToTop} to={configs.routes.home}>
+                    Contact us
+                </Link>
+                <Link onClick={scrollToTop} to={configs.routes.home}>
+                    Privacy policy
+                </Link>
             </div>
             <div className={cx('list-item', 'col', 'l-3')}>
                 <Link to={configs.routes.movie} onClick={scrollToTop}>

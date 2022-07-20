@@ -1,7 +1,7 @@
 import classNames from 'classnames/bind';
 import configs from '~/configs';
 import { Link } from 'react-router-dom';
-import { useFetchPopularAPI } from '~/hook';
+import { useFetchPopularService } from '~/hook';
 import { BodyItem } from '~/components/BodyItem';
 import { RightSidebar } from '~/components/RightSidebar';
 import style from './Home.module.scss';
@@ -9,11 +9,11 @@ import style from './Home.module.scss';
 const cx = classNames.bind(style);
 
 function Home() {
-    const listMoviesItem = useFetchPopularAPI(configs.filmType.movie).slice(
+    const listMoviesItem = useFetchPopularService(configs.filmType.movie).slice(
         0,
         10,
     );
-    const listTvItem = useFetchPopularAPI(configs.filmType.tv).slice(0, 10);
+    const listTvItem = useFetchPopularService(configs.filmType.tv).slice(0, 10);
 
     const scrollToTop = () => {
         window.scrollTo(0, 0);

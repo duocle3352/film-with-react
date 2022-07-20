@@ -42,8 +42,8 @@ function Search() {
         fetchAPI();
     }, [debounce]);
 
-    const NewResult = useCallback(() => {
-        return <RenderResult data={searchResult} />;
+    const RenderSearchResult = useCallback(() => {
+        return <RenderResult results={searchResult} />;
     }, [searchResult]);
 
     const handleClear = () => {
@@ -65,9 +65,17 @@ function Search() {
                 <div className={cx('search-result')} tabIndex="-1" {...attrs}>
                     <PopperWrapper>
                         <h3 className={cx('label')}>Result</h3>
-                        <NewResult />
+                        <RenderSearchResult />
                         <div className={cx('show')}>
-                            <Button to={configs.routes.search} blue>
+                            <Button
+                                blue
+                                to={configs.routes.search}
+                                onClick={() => {
+                                    dispatch(
+                                        actions.setShowSearchResult(false),
+                                    );
+                                }}
+                            >
                                 Show more
                             </Button>
                         </div>

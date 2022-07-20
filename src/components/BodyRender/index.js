@@ -1,1 +1,1 @@
-export { default } from './BodyRender.js';
+export { default as BodyRender } from './BodyRender';
