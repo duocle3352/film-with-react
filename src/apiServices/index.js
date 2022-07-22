@@ -7,3 +7,4 @@ export { default as filmDetailService } from './filmDetailService';
 export { default as getCastService } from './getCastService';
 export { default as getFinalTrailer } from './getFinalTrailer';
 export { default as getSimilarFilm } from './getSimilarFilm';
+export { default as appendService } from './appendService';

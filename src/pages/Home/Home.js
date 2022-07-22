@@ -19,7 +19,7 @@ function Home() {
         window.scrollTo(0, 0);
     };
 
-    const RenderListItem = ({ title, link, data, type }) => {
+    const RenderListHomeItem = ({ title, link, data, type }) => {
         return (
             <div className={cx('col', 'l-10')}>
                 <div className={cx('header')}>
@@ -45,7 +45,7 @@ function Home() {
 
     return (
         <div className={cx('wrapper', 'row')}>
-            <RenderListItem
+            <RenderListHomeItem
                 title="Popular movies"
                 link={configs.routes.movie}
                 data={listMoviesItem}
@@ -54,7 +54,7 @@ function Home() {
 
             <RightSidebar type={configs.filmType.movie} />
 
-            <RenderListItem
+            <RenderListHomeItem
                 title="Popular TV"
                 link={configs.routes.tv}
                 data={listTvItem}

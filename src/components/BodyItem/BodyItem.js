@@ -12,8 +12,8 @@ import style from './BodyItem.module.scss';
 
 const cx = classNames.bind(style);
 
-function BodyItem({ data, large, type }) {
-    const [state, dispatch] = useStoreContext();
+function BodyItem({ data, type, large }) {
+    const [, dispatch] = useStoreContext();
 
     const imgLink = imageService(data.poster_path, '300');
     const classes = cx('item-control', { large });
@@ -50,7 +50,8 @@ function BodyItem({ data, large, type }) {
 
 BodyItem.propTypes = {
     data: PropTypes.object.isRequired,
-    imgClassName: PropTypes.string,
+    large: PropTypes.bool,
+    type: PropTypes.string,
 };
 
 export default BodyItem;

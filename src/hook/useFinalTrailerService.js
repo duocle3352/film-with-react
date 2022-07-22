@@ -8,7 +8,9 @@ const useFinalTrailerService = (filmType, filmId) => {
         const fetchAPI = async () => {
             const result = await getFinalTrailer(filmType, filmId);
 
-            setTrailerKey(result.key);
+            if (result) {
+                setTrailerKey(result.key);
+            }
         };
 
         fetchAPI();

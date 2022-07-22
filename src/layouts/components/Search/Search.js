@@ -1,3 +1,4 @@
+import classNames from 'classnames/bind';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -5,7 +6,7 @@ import {
     faMagnifyingGlass,
 } from '@fortawesome/free-solid-svg-icons';
 import Tippy from '@tippyjs/react/headless';
-import classNames from 'classnames/bind';
+import { Link } from 'react-router-dom';
 
 import { actions } from '~/stores';
 import { useDebounce, useStoreContext } from '~/hook';
@@ -101,9 +102,15 @@ function Search() {
                         className={cx('clear')}
                         onClick={handleClear}
                     />
-                    <button className={cx('search-btn')}>
+                    <Link
+                        className={cx('search-btn')}
+                        to={configs.routes.search}
+                        onClick={() => {
+                            dispatch(actions.setShowSearchResult(false));
+                        }}
+                    >
                         <FontAwesomeIcon icon={faMagnifyingGlass} />
-                    </button>
+                    </Link>
                 </div>
             </div>
         </Tippy>

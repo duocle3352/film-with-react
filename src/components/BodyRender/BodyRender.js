@@ -4,7 +4,7 @@ import { BodyItem } from '~/components/BodyItem';
 import style from './BodyRender.module.scss';
 
 const cx = classNames.bind(style);
-function MovieAndTvBodyRender({ listItem, title }) {
+function BodyRender({ listItem, title }) {
     return (
         <>
             <h1 className={cx('title', 'l-12')}>{title}</h1>
@@ -17,9 +17,10 @@ function MovieAndTvBodyRender({ listItem, title }) {
     );
 }
 
-MovieAndTvBodyRender.propTypes = {
+BodyRender.propTypes = {
     listItem: PropTypes.array.isRequired,
     title: PropTypes.string.isRequired,
+    large: PropTypes.bool,
 };
 
-export default MovieAndTvBodyRender;
+export default BodyRender;

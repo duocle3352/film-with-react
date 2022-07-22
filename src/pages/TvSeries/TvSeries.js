@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import { useFetchPopularService } from '~/hook';
-import Pagination from '~/components/Pagination';
 import configs from '~/configs';
-import { BodyRender } from '~/components/BodyRender';
+import Pagination from '~/components/Pagination';
+import { PageTitle } from '~/components/PageTitle';
+import { BodyItem } from '~/components/BodyItem';
 
 function TvSeries() {
     const [currentPage, setCurrentPage] = useState(1);
@@ -18,7 +19,12 @@ function TvSeries() {
 
     return (
         <div className="row">
-            <BodyRender listItem={listTvSeries} title="TV Series" />
+            <PageTitle title="TV Series" />
+            <div className={'row'}>
+                {listTvSeries.map((item) => {
+                    return <BodyItem key={item.id} data={item} large />;
+                })}
+            </div>
             <Pagination
                 totalCount={100}
                 currentPage={currentPage}

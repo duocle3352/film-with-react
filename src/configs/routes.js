@@ -3,7 +3,7 @@ const routes = {
     movie: '/movie',
     search: '/search',
     tv: '/tv',
-    info: '/@:id',
+    detail: '/@:id',
 };
 
 export default routes;

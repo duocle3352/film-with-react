@@ -1,13 +1,23 @@
 import { useStoreContext, useDebounce, useSearchService } from '~/hook';
 import { actions } from '~/stores';
 import Pagination from '~/components/Pagination';
-import { BodyRender } from '~/components/BodyRender';
+import { PageTitle } from '~/components/PageTitle';
+import { BodyItem } from '~/components/BodyItem';
 
 function SearchPage() {
+    const STORAGE_DEBOUNCE = 'storage-debounce';
     const [state, dispatch] = useStoreContext();
     const { searchValue, currentPage } = state;
     const debounce = useDebounce(searchValue, 800);
-    const listItem = useSearchService(debounce, currentPage);
+
+    if (debounce) {
+        sessionStorage.setItem(STORAGE_DEBOUNCE, JSON.stringify(debounce));
+    }
+    const newDebounceValue = JSON.parse(
+        sessionStorage.getItem(STORAGE_DEBOUNCE),
+    );
+
+    const listItem = useSearchService(newDebounceValue, currentPage);
 
     const handlePageChange = (pageNumber) => {
         dispatch(actions.setCurrentPage(pageNumber));
@@ -16,11 +26,13 @@ function SearchPage() {
 
     return (
         <div className="row">
-            <BodyRender
-                listItem={listItem}
-                title={`Search result: ${searchValue}`}
-            />
-            {debounce && (
+            <PageTitle title={`Search result: ${newDebounceValue}`} />
+            <div className={'row'}>
+                {listItem.map((item) => {
+                    return <BodyItem key={item.id} data={item} large />;
+                })}
+            </div>
+            {newDebounceValue && (
                 <Pagination
                     totalCount={100}
                     currentPage={currentPage}
