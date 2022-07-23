@@ -16,7 +16,7 @@ import 'swiper/css/pagination';
 const cx = classNames.bind(style);
 
 function Slider() {
-    const [state, dispatch] = useStoreContext();
+    const [, dispatch] = useStoreContext();
     const sliderData = useTrendingService();
 
     return (

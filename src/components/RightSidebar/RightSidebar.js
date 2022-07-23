@@ -13,7 +13,7 @@ import style from './RightSidebar.module.scss';
 const cx = classNames.bind(style);
 
 function RightSidebar({ type }) {
-    const [state, dispatch] = useStoreContext();
+    const [, dispatch] = useStoreContext();
     const listItem = useTopRateService(type);
     return (
         <div className={cx('wrapper', 'col', 'l-2')}>

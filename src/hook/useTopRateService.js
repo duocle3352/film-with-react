@@ -12,7 +12,7 @@ const useTopRateService = (type) => {
         };
 
         fetchAPI();
-    }, []);
+    }, [type]);
 
     return listItem;
 };
