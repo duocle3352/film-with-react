@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/film-with-react/static/css/main.f0bae314.css",
-    "main.js": "/film-with-react/static/js/main.fe7de00f.js",
-    "static/js/787.e0ddb2d8.chunk.js": "/film-with-react/static/js/787.e0ddb2d8.chunk.js",
-    "static/media/logo.svg": "/film-with-react/static/media/logo.2d720274ff05bcd249447bad75aa8dda.svg",
-    "index.html": "/film-with-react/index.html",
-    "main.f0bae314.css.map": "/film-with-react/static/css/main.f0bae314.css.map",
-    "main.fe7de00f.js.map": "/film-with-react/static/js/main.fe7de00f.js.map",
-    "787.e0ddb2d8.chunk.js.map": "/film-with-react/static/js/787.e0ddb2d8.chunk.js.map"
+    "main.css": "/my-film/static/css/main.f0bae314.css",
+    "main.js": "/my-film/static/js/main.40d0a6c7.js",
+    "static/js/787.e0ddb2d8.chunk.js": "/my-film/static/js/787.e0ddb2d8.chunk.js",
+    "static/media/logo.svg": "/my-film/static/media/logo.2d720274ff05bcd249447bad75aa8dda.svg",
+    "index.html": "/my-film/index.html",
+    "main.f0bae314.css.map": "/my-film/static/css/main.f0bae314.css.map",
+    "main.40d0a6c7.js.map": "/my-film/static/js/main.40d0a6c7.js.map",
+    "787.e0ddb2d8.chunk.js.map": "/my-film/static/js/787.e0ddb2d8.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.f0bae314.css",
-    "static/js/main.fe7de00f.js"
+    "static/js/main.40d0a6c7.js"
   ]
 }
