@@ -13,6 +13,7 @@ function SearchPage() {
     if (debounce) {
         sessionStorage.setItem(STORAGE_DEBOUNCE, JSON.stringify(debounce));
     }
+
     const newDebounceValue = JSON.parse(
         sessionStorage.getItem(STORAGE_DEBOUNCE),
     );
@@ -29,7 +30,14 @@ function SearchPage() {
             <PageTitle title={`Search result: ${newDebounceValue}`} />
             <div className={'row'}>
                 {listItem.map((item) => {
-                    return <BodyItem key={item.id} data={item} large />;
+                    return (
+                        <BodyItem
+                            key={item.id}
+                            data={item}
+                            type={item.media_type}
+                            large
+                        />
+                    );
                 })}
             </div>
             {newDebounceValue && (

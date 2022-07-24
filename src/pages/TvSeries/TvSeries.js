@@ -22,7 +22,14 @@ function TvSeries() {
             <PageTitle title="TV Series" />
             <div className={'row'}>
                 {listTvSeries.map((item) => {
-                    return <BodyItem key={item.id} data={item} large />;
+                    return (
+                        <BodyItem
+                            key={item.id}
+                            data={item}
+                            type={configs.filmType.tv}
+                            large
+                        />
+                    );
                 })}
             </div>
             <Pagination

@@ -39,9 +39,12 @@ function FilmDetail() {
     if (!currentFilm) return;
 
     const listCast = currentFilm.credits.cast.slice(0, 6);
-    const listVideo = currentFilm.videos.results;
-    const trailerKey = listVideo[0].key;
     const similarFilms = currentFilm.similar.results;
+    const listVideo = currentFilm.videos.results;
+    let trailerKey;
+    if (listVideo.length > 0) {
+        trailerKey = listVideo[0].key;
+    }
 
     const bannerImgLink = `https://image.tmdb.org/t/p/original${currentFilm.backdrop_path}`;
     const posterLink = `https://image.tmdb.org/t/p/original${currentFilm.poster_path}`;

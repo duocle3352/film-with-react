@@ -21,7 +21,14 @@ function Movies() {
             <PageTitle title="Movies" />
             <div className={'row'}>
                 {listMovies.map((item) => {
-                    return <BodyItem key={item.id} data={item} large />;
+                    return (
+                        <BodyItem
+                            key={item.id}
+                            data={item}
+                            type={configs.filmType.movie}
+                            large
+                        />
+                    );
                 })}
             </div>
             <Pagination
